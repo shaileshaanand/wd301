@@ -1,4 +1,3 @@
-import "./App.css";
 import TaskCard from "./TaskCard";
 
 function App() {
