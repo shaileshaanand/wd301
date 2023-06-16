@@ -15,12 +15,12 @@ function App() {
           <TaskCard
             title="Build the website with static content"
             dueDate="10th April"
-            asigneeName="Rohit S"
+            assigneeName="Rohit S"
           />
           <TaskCard
             title="Add a blog"
             dueDate="22nd March"
-            asigneeName="Rohit M"
+            assigneeName="Rohit M"
           />
           <div>
             <button className="w-full bg-gray-200 text-left px-3 py-1 flex gap-1">
@@ -50,12 +50,12 @@ function App() {
           <TaskCard
             title="Design the mockup"
             completedAtDate="10th April"
-            asigneeName="Rohit M"
+            assigneeName="Rohit M"
           />
           <TaskCard
             title="Get the approval from principal"
             completedAtDate="20th April"
-            asigneeName="Ajay S"
+            assigneeName="Ajay S"
           />
         </div>
       </div>
