@@ -15,7 +15,7 @@ class TaskApp extends React.Component<TaskAppProp, TaskAppState> {
     };
   }
   addTask = (task: TaskItem) => {
-    this.setState((state, props) => {
+    this.setState((state) => {
       return {
         tasks: [...state.tasks, task],
       };
