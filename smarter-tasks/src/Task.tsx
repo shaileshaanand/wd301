@@ -1,32 +1,32 @@
-interface TaskProp {
-  title: string;
-  dueDate?: string;
-  description?: string;
-  deleteTask: () => void;
-}
+import "./TaskCard.css";
+import { TaskItem } from "./types";
 
-const Task = (props: TaskProp) => {
+interface TaskProps {
+  item: TaskItem;
+  removeTask: () => void;
+}
+const Task = (props: TaskProps) => {
+  const { item, removeTask } = props;
   return (
     <div className="TaskItem shadow-md border border-slate-100">
-      <h2 className="text-base font-bold my-1">{props.title}</h2>
-      <p className="text-sm text-slate-500">{props.dueDate}</p>
-      <p className="text-sm text-slate-500">Description: {props.description}</p>
-      <button onClick={props.deleteTask} className="deleteTaskButton">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-6 h-6"
+      <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
+        <div>
+          <a href={`/tasks/${item.id || ""}`}>
+            <h2 className="text-base font-bold my-1">{item.title}</h2>
+          </a>
+          <p className="text-sm text-slate-500">{item.dueDate}</p>
+          <p className="text-sm text-slate-500">
+            Description: {item.description}
+          </p>
+        </div>
+
+        <button
+          className="deleteTaskButton cursor-pointer flex items-center justify-center h-4 w-4 rounded-full my-5 mr-5"
+          onClick={removeTask}
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-          />
-        </svg>
-      </button>
+          X
+        </button>
+      </div>
     </div>
   );
 };

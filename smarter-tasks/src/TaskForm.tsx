@@ -1,8 +1,8 @@
 import React from "react";
-import { TaskItem } from "./types";
+import { NewTaskItem } from "./types";
 
 interface TaskFormProps {
-  addTask: (task: TaskItem) => void;
+  addTask: (task: NewTaskItem) => void;
 }
 
 interface TaskFormState {
