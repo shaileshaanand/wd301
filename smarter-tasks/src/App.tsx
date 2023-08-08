@@ -9,15 +9,21 @@ import TaskDetailsPage from "./pages/TaskDetailsPage";
 import Signin from "./pages/Signin";
 import ProtectedRoute from "./ProtectedRoute";
 import Layout from "./Layout";
+import NotFound from "./pages/NotFound";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Navigate to="/signin" replace />,
+    errorElement: <Navigate to="/notfound" replace />,
   },
   {
     path: "/signin",
     element: <Signin />,
+  },
+  {
+    path: "/notfound",
+    element: <NotFound />,
   },
   {
     element: (
