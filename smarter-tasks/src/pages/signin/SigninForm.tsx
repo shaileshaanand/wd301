@@ -35,7 +35,7 @@ const SigninForm: React.FC = () => {
       // After successful signin we have to redirect the user to the secured page. We will do that later.
       console.log("Navigating..");
 
-      navigate("/dashboard");
+      navigate("/account");
     } catch (error) {
       console.error("Sign-in failed:", error);
     }
