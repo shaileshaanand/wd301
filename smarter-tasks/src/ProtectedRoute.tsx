@@ -5,8 +5,8 @@ export default function ProtectedRoute({
 }: {
   children: JSX.Element;
 }) {
-  const authenticated = localStorage.getItem("authenticated");
-  if (authenticated === "true") {
+  const authenticated = !!localStorage.getItem("authToken");
+  if (authenticated) {
     return <>{children}</>;
   } else {
     return <Navigate to="/signin" />;
