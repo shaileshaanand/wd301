@@ -1,12 +1,12 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
 
 import AccountLayout from "../layouts/account";
-import ProtectedRoute from "../ProtectedRoute";
+import ProtectedRoute from "./ProtectedRoute";
 import Signin from "../pages/signin";
 import Signup from "../pages/signup";
 import Projects from "../pages/projects";
 import Members from "../pages/members";
-import NotFound from "../pages/NotFound";
+import NotFound from "../pages/Notfound";
 import Logout from "../pages/logout";
 
 const router = createBrowserRouter([

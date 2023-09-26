@@ -1,4 +1,4 @@
-import MembersList from "./MembersList";
+import MembersList from "./MemberList";
 import NewMember from "./NewMember";
 
 const Members = () => {

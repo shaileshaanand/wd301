@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import MembersListItems from "./MembersListItems";
+import MembersListItems from "./MemberListItems";
 import { MembersDispatch } from "../../context/members/reducer";
 import { useMembersDispatch } from "../../context/members/context";
 import { fetchMembers } from "../../context/members/actions";
