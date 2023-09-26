@@ -1,19 +1,30 @@
 import React, { useState } from "react";
 import { API_ENDPOINT } from "../../config/constants";
 import { useNavigate } from "react-router-dom";
+import { SubmitHandler, useForm } from "react-hook-form";
+
+type Inputs = {
+  organisationName: string;
+  userName: string;
+  userEmail: string;
+  userPassword: string;
+};
 
 const SignupForm: React.FC = () => {
-  const [organisationName, setOrganisationName] = useState("");
-  const [userName, setUserName] = useState("");
-  const [userEmail, setUserEmail] = useState("");
-  const [userPassword, setUserPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
+
   const navigate = useNavigate();
 
   console.log({ API_ENDPOINT });
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    const { organisationName, userName, userEmail, userPassword } = data;
     try {
       const response = await fetch(`${API_ENDPOINT}/organisations`, {
         method: "POST",
@@ -27,7 +38,7 @@ const SignupForm: React.FC = () => {
       });
 
       if (!response.ok) {
-        throw new Error("Sign-up failed");
+        setError("Signup Failed");
       }
       console.log("Sign-up successful");
       // extract the response body as JSON data
@@ -44,19 +55,19 @@ const SignupForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      {error && <span>{error}</span>}
       <div>
         <label className="block text-gray-700 font-semibold mb-2">
           Organisation Name:
         </label>
         <input
           type="text"
-          name="organisationName"
           id="organisationName"
-          value={organisationName}
-          onChange={(e) => setOrganisationName(e.target.value)}
+          {...register("organisationName", { required: true })}
           className="w-full border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
         />
+        {errors.organisationName && <span>This field is required</span>}
       </div>
       <div>
         <label className="block text-gray-700 font-semibold mb-2">
@@ -64,23 +75,21 @@ const SignupForm: React.FC = () => {
         </label>
         <input
           type="text"
-          name="userName"
           id="userName"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
+          {...register("userName", { required: true })}
           className="w-full border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
         />
+        {errors.userName && <span>This field is required</span>}
       </div>
       <div>
         <label className="block text-gray-700 font-semibold mb-2">Email:</label>
         <input
           type="email"
-          name="userEmail"
           id="userEmail"
-          value={userEmail}
-          onChange={(e) => setUserEmail(e.target.value)}
+          {...register("userEmail", { required: true })}
           className="w-full border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
         />
+        {errors.userEmail && <span>This field is required</span>}
       </div>
       <div>
         <label className="block text-gray-700 font-semibold mb-2">
@@ -88,12 +97,11 @@ const SignupForm: React.FC = () => {
         </label>
         <input
           type="password"
-          name="userPassword"
           id="userPassword"
-          value={userPassword}
-          onChange={(e) => setUserPassword(e.target.value)}
+          {...register("userPassword", { required: true })}
           className="w-full border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
         />
+        {errors.userPassword && <span>This field is required</span>}
       </div>
       <button
         type="submit"

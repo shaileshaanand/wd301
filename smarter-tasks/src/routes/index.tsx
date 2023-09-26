@@ -6,6 +6,8 @@ import Signin from "../pages/signin";
 import Signup from "../pages/signup";
 import Projects from "../pages/projects";
 import Members from "../pages/members";
+import NotFound from "../pages/NotFound";
+import Logout from "../pages/logout";
 
 const router = createBrowserRouter([
   { path: "/", element: <Navigate to="/account/projects" replace /> },
@@ -16,6 +18,10 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <Signup />,
+  },
+  {
+    path: "/notfound",
+    element: <NotFound />,
   },
   // Protected Routes
   {
@@ -34,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "members",
         element: <Members />,
+      },
+      {
+        path: "/logout",
+        element: <Logout />,
       },
     ],
   },

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { RouterProvider } from "react-router-dom";
 import router from "./routes";
 import { ThemeContext } from "./context/theme";
@@ -6,6 +6,7 @@ import { ThemeContext } from "./context/theme";
 // To do that, first I'll import the `ProjectsProvider` in the `App` component.
 
 import { ProjectsProvider } from "./context/projects/context";
+import { MembersProvider } from "./context/members/context";
 
 // Then I'll wrap the RouterProvider component with the <ProjectsProvider> component.
 const App = () => {
@@ -17,7 +18,9 @@ const App = () => {
       }`}
     >
       <ProjectsProvider>
-        <RouterProvider router={router} />
+        <MembersProvider>
+          <RouterProvider router={router} />
+        </MembersProvider>
       </ProjectsProvider>
     </div>
   );
