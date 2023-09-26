@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import MembersListItems from "./MembersListItems";
 import { MembersDispatch } from "../../context/members/reducer";
 import { useMembersDispatch } from "../../context/members/context";
