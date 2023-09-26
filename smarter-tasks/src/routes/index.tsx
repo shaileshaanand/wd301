@@ -23,6 +23,10 @@ const router = createBrowserRouter([
     path: "/notfound",
     element: <NotFound />,
   },
+  {
+    path: "/logout",
+    element: <Logout />,
+  },
   // Protected Routes
   {
     path: "account",
@@ -40,10 +44,6 @@ const router = createBrowserRouter([
       {
         path: "members",
         element: <Members />,
-      },
-      {
-        path: "/logout",
-        element: <Logout />,
       },
     ],
   },
