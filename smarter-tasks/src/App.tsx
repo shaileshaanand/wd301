@@ -1,8 +1,13 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { RouterProvider } from "react-router-dom";
 import router from "./routes";
 import { ThemeContext } from "./context/theme";
 
+// To do that, first I'll import the `ProjectsProvider` in the `App` component.
+
+import { ProjectsProvider } from "./context/projects/context";
+
+// Then I'll wrap the RouterProvider component with the <ProjectsProvider> component.
 const App = () => {
   const { theme } = useContext(ThemeContext);
   return (
@@ -11,8 +16,9 @@ const App = () => {
         theme === "dark" ? "dark" : ""
       }`}
     >
-      {theme}
-      <RouterProvider router={router} />
+      <ProjectsProvider>
+        <RouterProvider router={router} />
+      </ProjectsProvider>
     </div>
   );
 };
