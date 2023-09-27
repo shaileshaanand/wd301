@@ -32,6 +32,7 @@ module.exports = {
     "react-refresh/only-export-components": "off",
     "@typescript-eslint/no-unsafe-argument": "off",
     "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/no-empty-function": "off",
     "import/order": [
       "error",
       {
