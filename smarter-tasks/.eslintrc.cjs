@@ -8,6 +8,7 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:react-hooks/recommended",
+    "plugin:import/recommended",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -31,5 +32,34 @@ module.exports = {
     "react-refresh/only-export-components": "off",
     "@typescript-eslint/no-unsafe-argument": "off",
     "@typescript-eslint/no-misused-promises": "off",
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always",
+        alphabetize: {
+          order: "asc",
+          caseInsensitive: true,
+        },
+      },
+    ],
+    "sort-imports": [
+      "error",
+      {
+        ignoreCase: true,
+        ignoreDeclarationSort: true,
+      },
+    ],
+    "import/no-duplicates": "error",
+  },
+  settings: {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"],
+    },
+    "import/resolver": {
+      typescript: {
+        alwaysTryTypes: true,
+        project: "/",
+      },
+    },
   },
 };
