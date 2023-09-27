@@ -1,9 +1,10 @@
-import { createBrowserRouter , Navigate, Outlet } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 
 import AccountLayout from "../layouts/account";
 import Logout from "../pages/logout";
 import Members from "../pages/members";
 import NotFound from "../pages/Notfound";
+import ProjectDetails from "../pages/project_details/ProjectDetails";
 import Projects from "../pages/projects";
 import ProjectContainer from "../pages/projects/ProjectContainer";
 import Signin from "../pages/signin";
@@ -46,11 +47,7 @@ const router = createBrowserRouter([
           { index: true, element: <Projects /> },
           {
             path: ":projectID",
-            element: (
-              <>
-                Show project details <Outlet />
-              </>
-            ),
+            element: <ProjectDetails />,
             children: [
               { index: true, element: <></> },
               {
@@ -73,7 +70,6 @@ const router = createBrowserRouter([
           },
         ],
       },
-
       {
         path: "members",
         element: <Members />,
