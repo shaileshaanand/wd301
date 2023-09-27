@@ -4,11 +4,12 @@ import AccountLayout from "../layouts/account";
 import Logout from "../pages/logout";
 import Members from "../pages/members";
 import NotFound from "../pages/Notfound";
-import ProjectDetails from "../pages/project_details/ProjectDetails";
+import { ProjectDetailsIndex } from "../pages/project_details";
 import Projects from "../pages/projects";
 import ProjectContainer from "../pages/projects/ProjectContainer";
 import Signin from "../pages/signin";
 import Signup from "../pages/signup";
+import NewTask from "../pages/tasks/NewTask";
 
 import ProtectedRoute from "./ProtectedRoutes";
 
@@ -47,16 +48,16 @@ const router = createBrowserRouter([
           { index: true, element: <Projects /> },
           {
             path: ":projectID",
-            element: <ProjectDetails />,
+            element: <ProjectDetailsIndex />,
             children: [
               { index: true, element: <></> },
               {
                 path: "tasks",
                 children: [
-                  { index: true, element: <Navigate to="../" replace /> },
+                  { index: true, element: <Navigate to="../" /> },
                   {
                     path: "new",
-                    element: <>Show Modal window to create a task</>,
+                    element: <NewTask />,
                   },
                   {
                     path: ":taskID",
