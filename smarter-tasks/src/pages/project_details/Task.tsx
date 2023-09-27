@@ -1,16 +1,18 @@
-import React from "react";
+import React, { forwardRef } from "react";
+import { Draggable } from "react-beautiful-dnd";
 import { Link } from "react-router-dom";
 
 import { TaskDetails } from "../../context/task/types";
 
 import "./TaskCard.css";
 
-const Task: React.FC<React.PropsWithChildren<{ task: TaskDetails }>> = (
-  props
-) => {
+const Task = forwardRef<
+  HTMLDivElement,
+  React.PropsWithChildren<{ task: TaskDetails }>
+>((props, ref) => {
   const { task } = props;
   return (
-    <div className="m-2 flex">
+    <div ref={ref} {...props} className="m-2 flex">
       <Link
         className="TaskItem w-full shadow-md border border-slate-100 bg-white"
         to={`tasks/${task.id}`}
@@ -48,14 +50,26 @@ const Task: React.FC<React.PropsWithChildren<{ task: TaskDetails }>> = (
       </Link>
     </div>
   );
-};
+});
 
 const Container = (
   props: React.PropsWithChildren<{
     task: TaskDetails;
+    index: number;
   }>
 ) => {
-  return <Task task={props.task} />;
+  return (
+    <Draggable index={props.index} draggableId={`${props.task.id}`}>
+      {(provided) => (
+        <Task
+          task={props.task}
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+        />
+      )}
+    </Draggable>
+  );
 };
 
 export default Container;
