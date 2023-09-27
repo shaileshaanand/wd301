@@ -7,7 +7,7 @@ import { ProjectsDispatch } from "../../context/projects/reducer";
 const ProjectContainer = () => {
   const projectDispatch = useProjectsDispatch() as ProjectsDispatch;
   useEffect(() => {
-    fetchProjects(projectDispatch);
+    void fetchProjects(projectDispatch);
   }, [projectDispatch]);
   return <Outlet />;
 };

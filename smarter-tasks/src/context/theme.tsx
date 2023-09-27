@@ -7,6 +7,7 @@ interface ThemeContextProps {
 
 const ThemeContext = createContext<ThemeContextProps>({
   theme: "light",
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   setTheme: () => {},
 });
 
