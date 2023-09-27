@@ -21,6 +21,18 @@ export const taskReducer: Reducer<TaskListState, TaskActions> = (
   action
 ) => {
   switch (action.type) {
+    // Update reducer to handle the actions dispatched on fetching tasks.
+    case TaskListAvailableAction.FETCH_TASKS_REQUEST:
+      return { ...state, isLoading: true };
+    case TaskListAvailableAction.FETCH_TASKS_SUCCESS:
+      return { ...state, isLoading: false, projectData: action.payload };
+    case TaskListAvailableAction.FETCH_TASKS_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        errorMessage: action.payload,
+      };
     case TaskListAvailableAction.CREATE_TASK_REQUEST:
       return { ...state, isLoading: true };
     case TaskListAvailableAction.CREATE_TASK_SUCCESS:
@@ -32,7 +44,6 @@ export const taskReducer: Reducer<TaskListState, TaskActions> = (
         isError: true,
         errorMessage: action.payload,
       };
-
     case TaskListAvailableAction.REORDER_TASKS:
       return { ...state, isLoading: false, projectData: action.payload };
     default:
