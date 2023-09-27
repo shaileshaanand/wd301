@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { API_ENDPOINT } from "../../config/constants";
-import { useNavigate } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+
+import { API_ENDPOINT } from "../../config/constants";
+
 
 type Inputs = {
   organisationName: string;

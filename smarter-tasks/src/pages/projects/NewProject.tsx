@@ -1,11 +1,8 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 
-// First I'll import the addProject function
 import { addProject } from "../../context/projects/actions";
-
-// Then I'll import the useProjectsDispatch hook from projects context
 import { useProjectsDispatch } from "../../context/projects/context";
 import { ProjectsDispatch } from "../../context/projects/reducer";
 type Inputs = {

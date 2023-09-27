@@ -1,8 +1,9 @@
-import { Fragment, useState, useContext } from "react";
-import { Disclosure, Menu, Transition, Switch } from "@headlessui/react";
+import { Disclosure, Menu, Switch, Transition } from "@headlessui/react";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
-import Logo from "../../assets/images/logo.png";
+import { Fragment, useContext, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+
+import Logo from "../../assets/images/logo.png";
 import { ThemeContext } from "../../context/theme";
 
 const userNavigation = [

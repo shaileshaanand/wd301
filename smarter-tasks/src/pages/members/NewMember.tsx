@@ -1,9 +1,10 @@
-import { Fragment, useState } from "react";
-import { useMembersDispatch } from "../../context/members/context";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { addMember } from "../../context/members/actions";
-import { MembersDispatch } from "../../context/members/reducer";
 import { Dialog, Transition } from "@headlessui/react";
+import { Fragment, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+
+import { addMember } from "../../context/members/actions";
+import { useMembersDispatch } from "../../context/members/context";
+import { MembersDispatch } from "../../context/members/reducer";
 
 type Inputs = {
   name: string;

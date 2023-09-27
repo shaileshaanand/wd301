@@ -1,8 +1,9 @@
 import React from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 import { API_ENDPOINT } from "../../config/constants";
-import { useNavigate } from "react-router-dom";
-import { SubmitHandler, useForm } from "react-hook-form";
+
 
 type Inputs = {
   email: string;

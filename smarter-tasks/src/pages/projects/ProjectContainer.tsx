@@ -1,7 +1,8 @@
 import { useEffect } from "react";
-import { useProjectsDispatch } from "../../context/projects/context";
-import { fetchProjects } from "../../context/projects/actions";
 import { Outlet } from "react-router-dom";
+
+import { fetchProjects } from "../../context/projects/actions";
+import { useProjectsDispatch } from "../../context/projects/context";
 import { ProjectsDispatch } from "../../context/projects/reducer";
 
 const ProjectContainer = () => {

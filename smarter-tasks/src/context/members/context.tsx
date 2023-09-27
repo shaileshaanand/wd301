@@ -1,8 +1,9 @@
 import React, { createContext, useContext, useReducer } from "react";
+
 import {
+  intialMembersState,
   MembersActions,
   MembersState,
-  intialMembersState,
   reducer,
 } from "./reducer";
 

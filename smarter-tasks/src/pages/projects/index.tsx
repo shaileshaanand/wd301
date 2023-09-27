@@ -1,5 +1,5 @@
-import ProjectList from "./ProjectList";
 import NewProject from "./NewProject";
+import ProjectList from "./ProjectList";
 const Projects = () => {
   return (
     <>

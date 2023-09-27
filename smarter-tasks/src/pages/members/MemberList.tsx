@@ -1,8 +1,10 @@
 import { useEffect } from "react";
-import MembersListItems from "./MemberListItems";
-import { MembersDispatch } from "../../context/members/reducer";
-import { useMembersDispatch } from "../../context/members/context";
+
 import { fetchMembers } from "../../context/members/actions";
+import { useMembersDispatch } from "../../context/members/context";
+import { MembersDispatch } from "../../context/members/reducer";
+
+import MembersListItems from "./MemberListItems";
 
 const MembersList = () => {
   const dispatchMembers = useMembersDispatch() as MembersDispatch;

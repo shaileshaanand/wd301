@@ -3,11 +3,12 @@
 // First, I'll import the createContext, useContext and useReducer from React
 
 import React, { createContext, useContext, useReducer } from "react";
+
 import {
-  reducer,
   initialState,
-  ProjectsState,
   ProjectsActions,
+  ProjectsState,
+  reducer,
 } from "./reducer";
 
 const ProjectsStateContext = createContext<ProjectsState | undefined>(
