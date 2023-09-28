@@ -4,7 +4,7 @@ import { useProjectsState } from "../../context/projects/context";
 import { ProjectsState } from "../../context/projects/reducer";
 
 export default function ProjectListItems() {
-  const state = useProjectsState() as ProjectsState;
+  const state = useProjectsState();
   const { projects, isLoading, isError, errorMessage } = state;
   console.log(projects);
 

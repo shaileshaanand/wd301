@@ -30,5 +30,7 @@ export const MembersProvider: React.FC<React.PropsWithChildren> = ({
   );
 };
 
-export const useMembersState = () => useContext(MembersStateContext);
-export const useMembersDispatch = () => useContext(MembersDispatchContext);
+export const useMembersState = () =>
+  useContext(MembersStateContext) as MembersState;
+export const useMembersDispatch = () =>
+  useContext(MembersDispatchContext) as MembersDispatch;

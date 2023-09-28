@@ -44,5 +44,7 @@ export const ProjectsProvider: React.FC<React.PropsWithChildren> = ({
   );
 };
 
-export const useProjectsState = () => useContext(ProjectsStateContext);
-export const useProjectsDispatch = () => useContext(ProjectsDispatchContext);
+export const useProjectsState = () =>
+  useContext(ProjectsStateContext) as ProjectsState;
+export const useProjectsDispatch = () =>
+  useContext(ProjectsDispatchContext) as ProjectsDispatch;

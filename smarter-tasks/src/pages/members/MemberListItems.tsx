@@ -6,7 +6,7 @@ import {
 import { MembersDispatch, MembersState } from "../../context/members/reducer";
 
 export default function MembersListItems() {
-  const state = useMembersState() as MembersState;
+  const state = useMembersState();
 
   const { members, isLoading, isError, errorMessage } = state;
   const dispatchMembers = useMembersDispatch() as MembersDispatch;
