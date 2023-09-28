@@ -4,12 +4,13 @@ import AccountLayout from "../layouts/account";
 import Logout from "../pages/logout";
 import Members from "../pages/members";
 import NotFound from "../pages/Notfound";
-import { ProjectDetailsIndex } from "../pages/project_details";
+import { ProjectDetailsIndex as ProjectDetails } from "../pages/project_details";
 import Projects from "../pages/projects";
 import ProjectContainer from "../pages/projects/ProjectContainer";
 import Signin from "../pages/signin";
 import Signup from "../pages/signup";
 import NewTask from "../pages/tasks/NewTask";
+import TaskDetailsContainer from "../pages/tasks/TaskDetailsContainer";
 
 import ProtectedRoute from "./ProtectedRoutes";
 
@@ -48,7 +49,7 @@ const router = createBrowserRouter([
           { index: true, element: <Projects /> },
           {
             path: ":projectID",
-            element: <ProjectDetailsIndex />,
+            element: <ProjectDetails />,
             children: [
               { index: true, element: <></> },
               {
@@ -62,7 +63,7 @@ const router = createBrowserRouter([
                   {
                     path: ":taskID",
                     children: [
-                      { index: true, element: <>Show Task Details</> },
+                      { index: true, element: <TaskDetailsContainer /> },
                     ],
                   },
                 ],
@@ -71,6 +72,7 @@ const router = createBrowserRouter([
           },
         ],
       },
+
       {
         path: "members",
         element: <Members />,

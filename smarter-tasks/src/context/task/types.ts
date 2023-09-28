@@ -54,6 +54,11 @@ export enum TaskListAvailableAction {
   CREATE_TASK_SUCCESS = "CREATE_TASK_SUCCESS",
   CREATE_TASK_FAILURE = "CREATE_TASK_FAILURE",
 
+  // Add action types
+  UPDATE_TASK_REQUEST = "UPDATE_TASK_REQUEST",
+  UPDATE_TASK_SUCCESS = "UPDATE_TASK_SUCCESS",
+  UPDATE_TASK_FAILURE = "UPDATE_TASK_FAILURE",
+
   REORDER_TASKS = "REORDER_TASKS",
 }
 
@@ -67,5 +72,7 @@ export type TaskActions =
   | { type: TaskListAvailableAction.DELETE_TASKS_FAILURE; payload: string }
   | { type: TaskListAvailableAction.CREATE_TASK_REQUEST }
   | { type: TaskListAvailableAction.CREATE_TASK_SUCCESS }
-  | { type: TaskListAvailableAction.CREATE_TASK_FAILURE; payload: string };
-1;
+  | { type: TaskListAvailableAction.CREATE_TASK_FAILURE; payload: string }
+  | { type: TaskListAvailableAction.UPDATE_TASK_REQUEST }
+  | { type: TaskListAvailableAction.UPDATE_TASK_SUCCESS }
+  | { type: TaskListAvailableAction.UPDATE_TASK_FAILURE; payload: string };
