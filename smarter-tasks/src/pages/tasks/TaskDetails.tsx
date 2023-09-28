@@ -1,14 +1,18 @@
-import { Dialog, Transition } from "@headlessui/react";
-import React, { Fragment, useEffect, useState } from "react";
+import { Dialog, Listbox, Transition } from "@headlessui/react";
+import CheckIcon from "@heroicons/react/24/outline/CheckIcon";
+import { Fragment, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 
+import { useMembersState } from "../../context/members/context";
 import { useProjectsState } from "../../context/projects/context";
 import { updateTask } from "../../context/task/actions";
 import { useTasksDispatch, useTasksState } from "../../context/task/context";
 import { TaskDetailsPayload } from "../../context/task/types";
 
-type TaskFormUpdatePayload = TaskDetailsPayload;
+type TaskFormUpdatePayload = TaskDetailsPayload & {
+  selectedPerson: string;
+};
 
 // Helper function to format the date to YYYY-MM-DD format
 const formatDateForPicker = (isoDate: string) => {
@@ -29,6 +33,8 @@ const TaskDetails = () => {
 
   // Extract project and task details.
   const projectState = useProjectsState();
+  const memberState = useMembersState();
+
   const taskListState = useTasksState();
   const taskDispatch = useTasksDispatch();
 
@@ -37,7 +43,10 @@ const TaskDetails = () => {
   )[0];
 
   const selectedTask = taskListState.projectData.tasks[taskID ?? ""];
-  // Use react-form-hook to manage the form. Initialize with data from selectedTask.
+
+  const [selectedPerson, setSelectedPerson] = useState(
+    selectedTask.assignedUserName ?? ""
+  );
   const {
     register,
     handleSubmit,
@@ -46,10 +55,10 @@ const TaskDetails = () => {
     defaultValues: {
       title: selectedTask.title,
       description: selectedTask.description,
+      selectedPerson: selectedTask.assignedUserName,
       dueDate: formatDateForPicker(selectedTask.dueDate),
     },
   });
-
   if (!selectedProject) {
     return <>No such Project!</>;
   }
@@ -60,9 +69,13 @@ const TaskDetails = () => {
   }
 
   const onSubmit: SubmitHandler<TaskFormUpdatePayload> = (data) => {
+    const assignee = memberState?.members?.filter(
+      (member) => member.name === selectedPerson
+    )?.[0];
     void updateTask(taskDispatch, projectID ?? "", {
       ...selectedTask,
       ...data,
+      assignee: assignee?.id,
     });
     closeModal();
   };
@@ -94,7 +107,7 @@ const TaskDetails = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full max-w-md transform rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
@@ -127,6 +140,52 @@ const TaskDetails = () => {
                         {...register("dueDate", { required: true })}
                         className="w-full border rounded-md py-2 px-3 my-4 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
                       />
+                      <h3>
+                        <strong>Assignee</strong>
+                      </h3>
+                      <Listbox
+                        value={selectedPerson}
+                        onChange={setSelectedPerson}
+                      >
+                        <Listbox.Button className="w-full border rounded-md py-2 px-3 my-2 text-gray-700 text-base text-left">
+                          {selectedPerson || "Select"}
+                        </Listbox.Button>
+                        <Listbox.Options className="absolute mt-1 max-h-60 rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                          {memberState?.members.map((person) => (
+                            <Listbox.Option
+                              key={person.id}
+                              className={({ active }) =>
+                                `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                                  active
+                                    ? "bg-blue-100 text-blue-900"
+                                    : "text-gray-900"
+                                }`
+                              }
+                              value={person.name}
+                            >
+                              {({ selected }) => (
+                                <>
+                                  <span
+                                    className={`block truncate ${
+                                      selected ? "font-medium" : "font-normal"
+                                    }`}
+                                  >
+                                    {person.name}
+                                  </span>
+                                  {selected ? (
+                                    <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-blue-600">
+                                      <CheckIcon
+                                        className="h-5 w-5"
+                                        aria-hidden="true"
+                                      />
+                                    </span>
+                                  ) : null}
+                                </>
+                              )}
+                            </Listbox.Option>
+                          ))}
+                        </Listbox.Options>
+                      </Listbox>
                       <button
                         type="submit"
                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 mr-2 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"

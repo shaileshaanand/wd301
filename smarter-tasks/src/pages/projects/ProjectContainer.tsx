@@ -1,15 +1,18 @@
 import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 
+import { fetchMembers } from "../../context/members/actions";
+import { useMembersDispatch } from "../../context/members/context";
 import { fetchProjects } from "../../context/projects/actions";
 import { useProjectsDispatch } from "../../context/projects/context";
-import { ProjectsDispatch } from "../../context/projects/reducer";
 
 const ProjectContainer = () => {
-  const projectDispatch = useProjectsDispatch() as ProjectsDispatch;
+  const projectDispatch = useProjectsDispatch();
+  const memberDispatch = useMembersDispatch();
   useEffect(() => {
     void fetchProjects(projectDispatch);
-  }, [projectDispatch]);
+    void fetchMembers(memberDispatch);
+  }, [projectDispatch, memberDispatch]);
   return <Outlet />;
 };
 
