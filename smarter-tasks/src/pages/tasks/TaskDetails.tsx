@@ -5,11 +5,11 @@ import { Fragment, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { addComment, fetchComments } from "../../context/comments/actions";
+import { addComment, fetchComments } from "../../context/comment/actions";
 import {
   useCommentsDispatch,
   useCommentsState,
-} from "../../context/comments/context";
+} from "../../context/comment/context";
 import { useMembersState } from "../../context/members/context";
 import { useProjectsState } from "../../context/projects/context";
 import { updateTask } from "../../context/task/actions";

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { RouterProvider } from "react-router-dom";
 
-import { CommentsProvider } from "./context/comments/context";
+import { CommentsProvider } from "./context/comment/context";
 import { MembersProvider } from "./context/members/context";
 import { ProjectsProvider } from "./context/projects/context";
 import { ThemeContext } from "./context/theme";
