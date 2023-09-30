@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 import { useProjectsState } from "../../context/projects/context";
-import { ProjectsState } from "../../context/projects/reducer";
 
 export default function ProjectListItems() {
   const state = useProjectsState();

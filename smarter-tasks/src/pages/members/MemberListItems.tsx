@@ -3,7 +3,7 @@ import {
   useMembersDispatch,
   useMembersState,
 } from "../../context/members/context";
-import { MembersDispatch, MembersState } from "../../context/members/reducer";
+import { MembersDispatch } from "../../context/members/reducer";
 
 export default function MembersListItems() {
   const state = useMembersState();

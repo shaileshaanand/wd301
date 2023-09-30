@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import { RouterProvider } from "react-router-dom";
 
+import { CommentsProvider } from "./context/comments/context";
 import { MembersProvider } from "./context/members/context";
 import { ProjectsProvider } from "./context/projects/context";
 import { ThemeContext } from "./context/theme";
 import router from "./routes";
 
 // To do that, first I'll import the `ProjectsProvider` in the `App` component.
-
 
 // Then I'll wrap the RouterProvider component with the <ProjectsProvider> component.
 const App = () => {
@@ -20,10 +20,13 @@ const App = () => {
     >
       <ProjectsProvider>
         <MembersProvider>
-          <RouterProvider router={router} />
+          <CommentsProvider>
+            <RouterProvider router={router} />
+          </CommentsProvider>
         </MembersProvider>
       </ProjectsProvider>
     </div>
   );
 };
+
 export default App;

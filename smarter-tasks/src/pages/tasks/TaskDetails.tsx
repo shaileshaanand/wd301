@@ -1,9 +1,15 @@
 import { Dialog, Listbox, Transition } from "@headlessui/react";
+import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import CheckIcon from "@heroicons/react/24/outline/CheckIcon";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 
+import { addComment, fetchComments } from "../../context/comments/actions";
+import {
+  useCommentsDispatch,
+  useCommentsState,
+} from "../../context/comments/context";
 import { useMembersState } from "../../context/members/context";
 import { useProjectsState } from "../../context/projects/context";
 import { updateTask } from "../../context/task/actions";
@@ -27,6 +33,7 @@ const formatDateForPicker = (isoDate: string) => {
 
 const TaskDetails = () => {
   const [isOpen, setIsOpen] = useState(true);
+  const [enteredComment, setEnteredComment] = useState("");
 
   const { projectID, taskID } = useParams();
   const navigate = useNavigate();
@@ -38,11 +45,18 @@ const TaskDetails = () => {
   const taskListState = useTasksState();
   const taskDispatch = useTasksDispatch();
 
+  const commentsState = useCommentsState();
+  const commentsDispatch = useCommentsDispatch();
+
   const selectedProject = projectState?.projects.filter(
     (project) => `${project.id}` === projectID
   )[0];
 
   const selectedTask = taskListState.projectData.tasks[taskID ?? ""];
+
+  useEffect(() => {
+    void fetchComments(commentsDispatch, taskID ?? "", projectID ?? "");
+  }, [commentsDispatch, projectID, taskID]);
 
   const [selectedPerson, setSelectedPerson] = useState(
     selectedTask.assignedUserName ?? ""
@@ -186,6 +200,65 @@ const TaskDetails = () => {
                           ))}
                         </Listbox.Options>
                       </Listbox>
+                      <h3>
+                        <strong>Comments</strong>
+                      </h3>
+                      <div className="flex gap-2">
+                        <input
+                          type="text"
+                          id="commentBox"
+                          placeholder="Add a comment"
+                          value={enteredComment}
+                          onChange={(e) => setEnteredComment(e.target.value)}
+                          className=" grow border rounded-md py-2 px-3 my-4 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
+                        />
+                        <button
+                          id="addCommentBtn"
+                          onClick={async (e) => {
+                            e.preventDefault();
+                            if (enteredComment) {
+                              await addComment(
+                                commentsDispatch,
+                                taskID ?? "",
+                                projectID ?? "",
+                                enteredComment,
+                                localStorage
+                                  .getItem("userData")
+                                  ?.indexOf.toString() ?? ""
+                              );
+                              setEnteredComment("");
+                            }
+                          }}
+                        >
+                          <PaperAirplaneIcon className=" h-9 w-9 p-2 text-white bg-blue-600 rounded-md hover:bg-opacity-95" />
+                        </button>
+                      </div>
+                      {commentsState.isLoading || memberState.isLoading ? (
+                        "Loading..."
+                      ) : (
+                        <div className="flex flex-col gap-2 my-3">
+                          {commentsState.comments.map((comment) => {
+                            return (
+                              <div
+                                className="rounded border-2 flex flex-col"
+                                key={comment.id}
+                              >
+                                <p className="comment">{comment.description}</p>
+                                <div className="flex justify-between">
+                                  <p>
+                                    -{" "}
+                                    {
+                                      memberState.members?.find(
+                                        (member) => member.id === comment.owner
+                                      )?.name
+                                    }
+                                  </p>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
                       <button
                         type="submit"
                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 mr-2 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
