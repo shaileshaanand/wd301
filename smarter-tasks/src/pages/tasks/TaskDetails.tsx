@@ -240,10 +240,10 @@ const TaskDetails = () => {
                           {commentsState.comments.map((comment) => {
                             return (
                               <div
-                                className="rounded border-2 flex flex-col"
+                                className="rounded border-2 flex flex-col comment"
                                 key={comment.id}
                               >
-                                <p className="comment">{comment.description}</p>
+                                <p>{comment.description}</p>
                                 <div className="flex justify-between">
                                   <p>
                                     -{" "}
