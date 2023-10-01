@@ -247,11 +247,14 @@ const TaskDetails = () => {
                                 <div className="flex justify-between">
                                   <p>
                                     -{" "}
-                                    {
-                                      memberState.members?.find(
-                                        (member) => member.id === comment.owner
-                                      )?.name
-                                    }
+                                    {memberState.members?.find(
+                                      (member) => member.id === comment.owner
+                                    )?.name === "Acme"
+                                      ? "Alice"
+                                      : memberState.members?.find(
+                                          (member) =>
+                                            member.id === comment.owner
+                                        )?.name}
                                   </p>
                                 </div>
                               </div>
