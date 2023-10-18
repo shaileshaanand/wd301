@@ -12,7 +12,7 @@ import Signup from "../pages/signup";
 import NewTask from "../pages/tasks/NewTask";
 import TaskDetailsContainer from "../pages/tasks/TaskDetailsContainer";
 
-import ProtectedRoute from "./ProtectedRoutes";
+import ProtectedRoute from "./ProtectedRoute";
 
 const router = createBrowserRouter([
   { path: "/", element: <Navigate to="/account/projects" replace /> },
