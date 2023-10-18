@@ -1,7 +1,10 @@
-import React, { Suspense } from "react";
-const ProjectList = React.lazy(() => import("./ProjectList"));
-import NewProject from "./NewProject";
+import { lazy, Suspense } from "react";
+
 import ErrorBoundary from "../../components/ErrorBoundry";
+
+import NewProject from "./NewProject";
+
+const ProjectList = lazy(() => import("./ProjectList"));
 
 const Projects = () => {
   return (
@@ -20,6 +23,5 @@ const Projects = () => {
     </>
   );
 };
-
 
 export default Projects;
